@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.davidgh.mults.activities.LoginActivity"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rv_top_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/bg" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center|top"
+            android:layout_marginTop="36dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create a New Account"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#fff"/>
+
+            <!-- TODO 3: Text Input Layout for Email and passwords-->
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:background="@drawable/inp_border"
+                android:padding="8dp"
+                android:layout_marginTop="22dp"
+                android:textColorHint="#626262"
+                android:textColor="#626262"
+                android:inputType="textPersonName"/>
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:background="@drawable/inp_border"
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:textColorHint="#626262"
+                android:textColor="#626262"
+                android:inputType="textEmailAddress"/>
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:background="@drawable/inp_border"
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:textColorHint="#626262"
+                android:textColor="#626262"
+                android:inputType="textPassword"/>
+
+            <EditText
+                android:id="@+id/et_cpassword"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="Confirm Password"
+                android:background="@drawable/inp_border"
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:textColorHint="#626262"
+                android:textColor="#626262"
+                android:inputType="textPassword"/>
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/go_btn"
+                android:textColor="#fff"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </RelativeLayout><!-- Top Content-->
+
+</LinearLayout>

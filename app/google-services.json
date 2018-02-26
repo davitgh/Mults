@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "855002344505",
+    "firebase_url": "https://mults-38db2.firebaseio.com",
+    "project_id": "mults-38db2",
+    "storage_bucket": "mults-38db2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855002344505:android:8729a6313fcde4db",
+        "android_client_info": {
+          "package_name": "com.davidgh.mults"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "855002344505-d6pm7ca2tljv1b8o63t031599uoqgon2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.davidgh.mults",
+            "certificate_hash": "aec3d017bca0d9a607e264c209743bcf2da4c740"
+          }
+        },
+        {
+          "client_id": "855002344505-mv0pb22l46tih4dn75guht3amdfc1f68.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzRozK6os3UFHPCN3-k60zl_ozn8ysaE0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "855002344505-mv0pb22l46tih4dn75guht3amdfc1f68.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

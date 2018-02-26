@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Mults</string>
+    <string name="navigation_drawer_open">Open navigation Drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string-array name="query_suggestions">
+        <item>Furniture</item>
+        <item>Alisa</item>
+        <item>Alice</item>
+        <item>Davit Ghukasyan</item>
+        <item>Davit Ghukasyan Mkhitar</item>
+        <item>Alice Muradyan</item>
+    </string-array>
+</resources>

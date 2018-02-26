@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO 4: Important: Here should be animation, from navigation state it should translate to new activity -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.davidgh.mults.activities.ProfileActivity"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <View
+            android:background="@drawable/profile_drawable"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:transitionName="llTransition"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginTop="42dp"
+            android:layout_centerHorizontal="true"
+            android:transitionName="imageTransition"/>
+
+        <TextView
+            android:id="@+id/user_name"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Android Studio"
+            android:layout_marginTop="150dp"
+            android:textColor="@color/whitePrimary"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:transitionName="nameTransition"/>
+
+        <TextView
+            android:id="@+id/user_email"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="studio.android.@android.com"
+            android:layout_marginTop="170dp"
+            android:textColor="@color/whitePrimary"
+            android:transitionName="emailTransition"/>
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/profile_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/profile_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:foregroundGravity="bottom"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/nav_profile" />
+    <!-- TODO: View Updated by click Listener of above mentioned links -->
+</LinearLayout>
