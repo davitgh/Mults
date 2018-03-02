@@ -61,6 +61,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private MaterialSearchView mSearchView;
     private ArrayList<SectionMultsModel> allSampleData;
 
+    // Android Layout
+    private TextView profileEmail, profileName;
+    private CircleImageView profileImg;
+    private LinearLayout profileLayout;
+
     // Adapter
     private RecyclerViewDataAdapter adapter;
 
@@ -86,27 +91,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mNav.setNavigationItemSelectedListener(this);
         LinearLayout header = (LinearLayout) mNav.getHeaderView(0);
 
-        final LinearLayout profileLayout = (LinearLayout) header.findViewById(R.id.ll_profile);
-        final CircleImageView profileImg = (CircleImageView) header.findViewById(R.id.profile_img);
-        final TextView profileName = (TextView) header.findViewById(R.id.profile_name);
-        final TextView profileEmail = (TextView) header.findViewById(R.id.profile_mail);
-
-        if (null != mAuth.getCurrentUser()) {
-            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-            mDatabase.child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    profileName.setText(dataSnapshot.child("username").getValue().toString());
-                    profileEmail.setText(dataSnapshot.child("email").getValue().toString());
-                    Picasso.with(MainActivity.this).load(dataSnapshot.child("image").getValue().toString()).into(profileImg);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        } // end if
+        profileLayout = (LinearLayout) header.findViewById(R.id.ll_profile);
+        profileImg = (CircleImageView) header.findViewById(R.id.profile_img);
+        profileName = (TextView) header.findViewById(R.id.profile_name);
+        profileEmail = (TextView) header.findViewById(R.id.profile_mail);
 
         header.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,7 +167,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent loginIntent = new Intent(this, LoginActivity.class);
             startActivity(loginIntent);
             finish();
-        }
+        } else {
+                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+                mDatabase.child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        profileName.setText(dataSnapshot.child("username").getValue().toString());
+                        profileEmail.setText(dataSnapshot.child("email").getValue().toString());
+                        Picasso.with(getApplicationContext()).load(dataSnapshot.child("image").getValue().toString()).into(profileImg);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+        } // End If
     }
 
     private void createDummyData(){

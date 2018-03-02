@@ -152,6 +152,7 @@ public class ProfileActivity extends AppCompatActivity {
         mViewPager.setAdapter(adapter);
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -159,6 +160,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (requestCode == GALLERY_PICK && resultCode == RESULT_OK){
 
             Uri imageUri = data.getData();
+
 
             CropImage.activity(imageUri)
                     .setAspectRatio(1,1)
@@ -193,8 +195,9 @@ public class ProfileActivity extends AppCompatActivity {
 
 
             } else {
-                Exception error = result.getError();
+                //Exception error = result.getError();
             }
+
         } // End if
     }
 

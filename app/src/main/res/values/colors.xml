@@ -5,5 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorFb">#5585e5</color>
     <color name="colorTw">#56b0f1</color>
+    <color name="bg_row">#fa315b</color>
 
 </resources>

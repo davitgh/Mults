@@ -56,7 +56,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
             @Override
             public void onClick(View view) {
                 Intent sectionIntent = new Intent(mContext, SectionActivity.class);
-                sectionIntent.putExtra("section_name", holder.sectionTitle.getText().toString());
+                sectionIntent.putExtra("section_name", holder.getAdapterPosition());
                 mContext.startActivity(sectionIntent);
             }
         });
