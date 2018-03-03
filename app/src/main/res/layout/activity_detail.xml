@@ -85,17 +85,16 @@
             android:text="Full Cast &amp; Crew"
             android:padding="10dp"
             android:layout_marginTop="18dp"
-            android:textSize="7.5sp" />
+            android:textSize="12sp" />
 
     </RelativeLayout>
 
     <!-- TODO 5: Here Should be horizontal slider whith actors -->
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mult_actors"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp" />
+        android:layout_height="150dp" />
 
     <!-- TODO 6: Here should be 3 buttons Like, Favorite, Comment -->
 

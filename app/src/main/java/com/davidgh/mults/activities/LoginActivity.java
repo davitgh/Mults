@@ -2,7 +2,6 @@ package com.davidgh.mults.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +35,7 @@ import java.util.HashMap;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
+    private static final int RC_SIGN_IN = 1;
 
     // Firebase
     private FirebaseAuth mAuth;
@@ -148,7 +148,7 @@ public class LoginActivity extends AppCompatActivity {
                 GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(LoginActivity.this, gso);
 
                 Intent googleIntent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(googleIntent, 10); // TODO; replace 10 to RC_SIGN_IN constant
+                startActivityForResult(googleIntent, RC_SIGN_IN);
             }
         });
 
@@ -204,7 +204,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 10) { // TODO; previous
+        if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
@@ -217,7 +217,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         } else {
-            // TODO ;
+            // TODO : handel this situation
         }
     }
 }

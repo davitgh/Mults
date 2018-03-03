@@ -14,8 +14,7 @@ public class CommonSettings {
     public static final String YOUTUBE_VIDEO_CODE = "_oEA18Y8gM0";
 
 
-    public static final String API_ALL_MULTS = "http://lxsimple.000webhostapp.com/api/mults";
-    public static final String API_ALL_DETAILS = "http://lxsimple.000webhostapp.com/api/details";
+    public static final String API_ALL_MULTS = "http://lxsimple.000webhostapp.com/api/mult";
 
     public static String getMultHeader(int i){
         switch(i){

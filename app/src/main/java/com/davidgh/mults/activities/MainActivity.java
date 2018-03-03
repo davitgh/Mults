@@ -277,6 +277,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
+            // TODO : Make Progress Dialog which will wait for download process
+
             Gson gson = new Gson();
             Type type = new TypeToken<Mult>(){}.getType();
 
