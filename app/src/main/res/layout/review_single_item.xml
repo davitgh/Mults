@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/reviewer_img"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_person"
+        android:layout_marginRight="12dp"/>
+
+    <TextView
+        android:id="@+id/reviewer_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/reviewer_img"
+        android:text="Name Surname" />
+
+    <RatingBar
+        android:id="@+id/reviewer_rating"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="0.1"
+        android:rating="4"
+        android:isIndicator="true"
+        android:layout_toEndOf="@+id/reviewer_img"
+        android:layout_below="@+id/reviewer_name" />
+
+    <TextView
+        android:id="@+id/reviewer_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="03/15/2016"
+        android:layout_toEndOf="@+id/reviewer_rating"
+        android:layout_below="@+id/reviewer_name"
+        android:layout_marginStart="6dp" />
+
+    <TextView
+        android:id="@+id/reviewer_review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/large_text"
+        android:layout_below="@+id/reviewer_rating"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/reviewer_img"/>
+</RelativeLayout>

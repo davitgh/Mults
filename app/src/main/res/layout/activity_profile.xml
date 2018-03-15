@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- TODO 4: Important: Here should be animation, from navigation state it should translate to new activity -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.davidgh.mults.activities.ProfileActivity"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <RelativeLayout

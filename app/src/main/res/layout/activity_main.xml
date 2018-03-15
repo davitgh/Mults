@@ -9,53 +9,46 @@
     android:fitsSystemWindows="true"
     android:id="@+id/drawer_layout">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_to_refresh"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context="com.davidgh.mults.activities.MainActivity"
+        android:orientation="vertical" >
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/toolbar_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            tools:context="com.davidgh.mults.activities.MainActivity"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content">
 
-            <!-- Must be last for right layering display -->
-            <FrameLayout
-                android:id="@+id/toolbar_container"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/main_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize" />
+
+            <com.claudiodegio.msv.MaterialSearchView
+                android:id="@+id/sv"
+                android:elevation="5dip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+            </com.claudiodegio.msv.MaterialSearchView>
+        </FrameLayout>
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/main_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?android:attr/actionBarSize" />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-                <com.claudiodegio.msv.MaterialSearchView
-                    android:id="@+id/sv"
-                    android:elevation="5dip"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </com.claudiodegio.msv.MaterialSearchView>
-            </FrameLayout>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scrollbars="none"
-                    android:layout_weight="1" />
-
-            <android.support.design.widget.BottomNavigationView
-                    android:id="@+id/bottom_nav"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="?android:attr/windowBackground"
-                    app:menu="@menu/nav_menu"/>
-        </LinearLayout>
-    </android.support.v4.widget.SwipeRefreshLayout>
+        <android.support.design.widget.BottomNavigationView
+                android:id="@+id/bottom_nav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="?android:attr/windowBackground"
+                app:menu="@menu/nav_menu"/>
+    </LinearLayout>
 
     <!-- Navigation View -->
     <android.support.design.widget.NavigationView

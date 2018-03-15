@@ -15,6 +15,8 @@ public class CommonSettings {
 
 
     public static final String API_ALL_MULTS = "http://lxsimple.000webhostapp.com/api/mult";
+    public static final String API_LIKED_MULTS = "http://lxsimple.000webhostapp.com/api/mult/liked";
+
 
     public static String getMultHeader(int i){
         switch(i){

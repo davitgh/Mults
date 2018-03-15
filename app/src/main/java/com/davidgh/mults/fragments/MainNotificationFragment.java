@@ -11,17 +11,16 @@ import android.view.ViewGroup;
 import com.davidgh.mults.R;
 
 /**
- * Created by davidgh on 2/26/18.
+ * Created by davidgh on 3/6/18.
  */
 
-public class ProfileWatchingFragment extends Fragment {
-
-    public ProfileWatchingFragment() {
-    }
+public class MainNotificationFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile_watching, container, false);
+        View v =  inflater.inflate(R.layout.fragment_main_notifications, container, false);
+
+        return v;
     }
 }

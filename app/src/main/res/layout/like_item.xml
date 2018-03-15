@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="4dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="1dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whitePrimary"
+                android:padding="4dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/like_img"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="16dp"
+                    android:scaleType="centerCrop"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:id="@+id/like_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/like_img"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:ems="12"
+                    android:textColor="#535353"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/like_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/like_name"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/like_img"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccent"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/expandable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="4dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/btn_dislike"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dislike"
+                    android:gravity="left|center_vertical"
+                    android:drawablePadding="30dp"
+                    android:paddingLeft="30dp"
+                    android:drawableLeft="@mipmap/ic_dislike"
+                    android:background="@android:color/transparent" />
+
+                <Button
+                    android:id="@+id/btn_details"
+                    android:layout_width="match_parent"
+                    android:text="Details"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:drawablePadding="25dp"
+                    android:paddingLeft="25dp"
+                    android:drawableLeft="@drawable/ic_details"
+                    android:background="@android:color/transparent" />
+
+                <Button
+                    android:id="@+id/btn_add_watchlist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add watchlist"
+                    android:gravity="left|center_vertical"
+                    android:drawablePadding="25dp"
+                    android:paddingLeft="25dp"
+                    android:layout_marginBottom="1dp"
+                    android:drawableLeft="@drawable/ic_watchlist"
+                    android:background="@android:color/transparent"
+                    />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</LinearLayout>

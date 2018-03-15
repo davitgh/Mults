@@ -7,8 +7,8 @@
 
     <item
         android:id="@+id/profile_watching"
-        android:icon="@mipmap/ic_watching"
-        android:title="Watching" />
+        android:icon="@mipmap/ic_watchlist"
+        android:title="Watchlist" />
 
     <item
         android:id="@+id/profile_settings"

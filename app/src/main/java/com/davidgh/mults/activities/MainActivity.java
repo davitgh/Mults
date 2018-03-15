@@ -2,19 +2,16 @@ package com.davidgh.mults.activities;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,12 +22,11 @@ import android.widget.TextView;
 import com.claudiodegio.msv.MaterialSearchView;
 import com.claudiodegio.msv.OnSearchViewListener;
 import com.davidgh.mults.R;
-import com.davidgh.mults.adapters.RecyclerViewDataAdapter;
-import com.davidgh.mults.helpers.CommonSettings;
-import com.davidgh.mults.helpers.NetworkUtils;
-import com.davidgh.mults.models.Mult;
-import com.davidgh.mults.models.SectionMultsModel;
-import com.davidgh.mults.models.SingleMultModel;
+import com.davidgh.mults.adapters.ViewPagerAdapter;
+import com.davidgh.mults.fragments.MainDashboardFragment;
+import com.davidgh.mults.fragments.MainHomeFragment;
+import com.davidgh.mults.fragments.MainNotificationFragment;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,20 +34,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    // TODO   : 03/05/2018
+    // TODO 2 : IMPORTANT, Add Comment Layout, and the functionality
+    // TODO 3 : IMPORTANT, Add Settings fragment in ProfileActivity
+
+    // TODO   : 03/06/2018
+    // TODO 5 : IMPORTANT, Add 1 Data into database;
 
     // Firebase
     private FirebaseAuth mAuth;
@@ -60,16 +55,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout mDrawer;
     private NavigationView mNav;
     private MaterialSearchView mSearchView;
-    private ArrayList<SectionMultsModel> allSampleData;
+
 
     // Android Layout
     private TextView profileEmail, profileName;
     private CircleImageView profileImg;
     private LinearLayout profileLayout;
-    private SwipeRefreshLayout mSwipeToRefresh;
-
-    // Adapter
-    private RecyclerViewDataAdapter adapter;
+    private ViewPager mViewPagerMain;
+    private BottomNavigationView mBottomNavigation;
+    private MenuItem menuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,12 +76,58 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar mToolbar = (Toolbar)findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
 
+        mViewPagerMain = (ViewPager) findViewById(R.id.view_pager_main);
+
         // Drawer Layout Functionality
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
+
+
+        mBottomNavigation = (BottomNavigationView) findViewById(R.id.bottom_nav);
+        mBottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navigation_home:
+                        mViewPagerMain.setCurrentItem(0);
+                        break;
+                    case R.id.navigation_dashboard:
+                        mViewPagerMain.setCurrentItem(1);
+                        break;
+                    case R.id.navigation_notifications:
+                        mViewPagerMain.setCurrentItem(2);
+                        break;
+                }
+                return false;
+            }
+        });
+
+        mViewPagerMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (null != menuItem)
+                    menuItem.setChecked(false);
+                else
+                    mBottomNavigation.getMenu().getItem(0).setChecked(false);
+                mBottomNavigation.getMenu().getItem(position).setChecked(true);
+                menuItem = mBottomNavigation.getMenu().getItem(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        setupViewPager();
 
         mNav = (NavigationView) findViewById(R.id.nav_view);
         mNav.setNavigationItemSelectedListener(this);
@@ -114,7 +154,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        // Search View Here
+
+    // Search View Here
 
         mSearchView = (MaterialSearchView) findViewById(R.id.sv);
         mSearchView.setOnSearchViewListener(new OnSearchViewListener() {
@@ -138,27 +179,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         }); // this class implements OnSearchViewListener
+    }
 
+    private void setupViewPager() {
 
-        mSwipeToRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_to_refresh);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        mSwipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                createDummyData();
-                mSwipeToRefresh.setRefreshing(false); // TODO: change place to get normal operation
-            }
-        });
+        adapter.addFragment(new MainHomeFragment());
+        adapter.addFragment(new MainDashboardFragment());
+        adapter.addFragment(new MainNotificationFragment());
 
-        allSampleData = new ArrayList<>();
-
-        createDummyData();
-
-        RecyclerView rvMain = (RecyclerView) findViewById(R.id.rv_main);
-        rvMain.setHasFixedSize(true);
-        adapter = new RecyclerViewDataAdapter(allSampleData, this);
-        rvMain.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        rvMain.setAdapter(adapter);
+        mViewPagerMain.setAdapter(adapter);
     }
 
     @Override
@@ -198,15 +229,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } // End If
     }
 
-    private void createDummyData(){
-        if (NetworkUtils.isNetworkAvailable(this)){
-            new GetMults().execute(CommonSettings.API_ALL_MULTS);
-        } else{
-            // TODO : handel internet
-        }
-        // {now, popular, comming soon}
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -232,8 +254,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.nav_watchlist) {
+            Intent watchlistIntent = new Intent(getApplicationContext(), WatchlistActivity.class);
+            startActivity(watchlistIntent);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -257,55 +280,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(loginIntent);
         finish();
-    }
-
-    private class GetMults extends AsyncTask<String, Void, String>{
-
-        @Override
-        protected String doInBackground(String... urls) {
-            String stream = null;
-            String urlString = urls[0];
-
-            NetworkUtils networkUtils = new NetworkUtils();
-
-            stream = networkUtils.getHttpData(urlString);
-
-            return stream;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            // TODO : Make Progress Dialog which will wait for download process
-
-            Gson gson = new Gson();
-            Type type = new TypeToken<Mult>(){}.getType();
-
-            try {
-                JSONObject jsonObject = new JSONObject(s);
-                JSONArray jsonArray = jsonObject.getJSONArray("mults");
-
-                for (int i = 0; i < 3; i++) {
-                    SectionMultsModel mults = new SectionMultsModel();
-                    mults.setHeader(CommonSettings.getMultHeader(i));
-                    ArrayList<SingleMultModel> singleMultModels = new ArrayList<>();
-
-                    for (int j = i * 17; j < (i+1) * 17; j++) {
-
-                        JSONObject multObject = jsonArray.getJSONObject(j);
-                        Mult m = gson.fromJson(String.valueOf(multObject), type);
-
-                        singleMultModels.add(new SingleMultModel(m.getName(), m.getUrl(), j)); // TODO make rating float, and add second string
-                    }
-
-                    mults.setAllMultsInSection(singleMultModels);
-                    allSampleData.add(mults);
-                    adapter.notifyDataSetChanged();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }

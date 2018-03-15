@@ -67,7 +67,7 @@ public class SectionListMultsAdapter extends RecyclerView.Adapter<SectionListMul
                 public void onClick(View view) {
                     // TODO 5: Important, add animation
                     Intent detailIntent = new Intent(mContext, DetailActivity.class);
-                    detailIntent.putExtra("mult_id", getLayoutPosition() + 1);
+                    detailIntent.putExtra("mult_id", String.valueOf(getLayoutPosition() + 1));
                     mContext.startActivity(detailIntent);
                 }
             });

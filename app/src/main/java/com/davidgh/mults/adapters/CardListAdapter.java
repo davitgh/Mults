@@ -82,6 +82,4 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.ViewHo
             viewForeground = v.findViewById(R.id.view_foreground);
         }
     }
-
-
 }

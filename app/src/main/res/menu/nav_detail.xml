@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@mipmap/ic_watching"
+        android:icon="@mipmap/ic_watchlist"
         android:title="Favorite" />
 
     <item

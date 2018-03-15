@@ -16,7 +16,7 @@ import com.davidgh.mults.R;
 import com.davidgh.mults.adapters.ViewPagerAdapter;
 import com.davidgh.mults.fragments.ProfileLikeFragment;
 import com.davidgh.mults.fragments.ProfileSettingsFragment;
-import com.davidgh.mults.fragments.ProfileWatchingFragment;
+import com.davidgh.mults.fragments.ProfileWatchlistFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -105,8 +105,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        setupViewPager();
-
         // Firebase
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -126,11 +124,12 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        setupViewPager();
+
         // Change user Image
         mProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 Intent galleryIntent = new Intent();
                 galleryIntent.setType("image/*");
@@ -146,7 +145,7 @@ public class ProfileActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         adapter.addFragment(new ProfileLikeFragment());
-        adapter.addFragment(new ProfileWatchingFragment());
+        adapter.addFragment(new ProfileWatchlistFragment());
         adapter.addFragment(new ProfileSettingsFragment());
 
         mViewPager.setAdapter(adapter);
